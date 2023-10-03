@@ -4,21 +4,17 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://forecastweather:GTwebdev@cluster0.o2oa4an.mongodb.net/?retryWrites=true&w=majority";
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+// Create a MongoClient
 const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
+  serverApi: ServerApiVersion.v1,
 });
 
 try {
   client.connect();
   client.db("admin").command({ ping: 1 });
   console.log("You successfully connected to MongoDB!");
-} finally {
-  client.close();
+} catch(e) {
+  console.error(e)
 }
 
 // create express app and configure it
