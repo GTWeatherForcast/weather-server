@@ -59,6 +59,11 @@ app.post("/api/v1/sign-up", (req, res) => {
   res.json({message: "complete"})
 });
 
+app.post("/api/v1/sign-in", (req, res) => {
+  console.log(req.body.message);
+  res.json({ message: "works" });
+});
+
 // routes
 require('./routes/auth.routes')(app);
 
