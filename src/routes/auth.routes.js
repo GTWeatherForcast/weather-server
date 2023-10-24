@@ -1,4 +1,4 @@
-const controller = require("../controllers/auth");
+const controller = require("../controller/auth.contoller");
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -9,11 +9,7 @@ module.exports = function(app) {
         next();
     });
 
-    app.post(
-        "/api/v1/auth/sign-in",
-        [],
-        controller.signin
-    );
+    app.post("/api/v1/auth/sign-in", controller.signin);
 
-    app.post("/api/auth/signin", controller.signin);
+    app.post("/api/v1/auth/sign-up", controller.signup);
 };

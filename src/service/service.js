@@ -28,4 +28,4 @@ async function insertUser(u, e, p) {
     console.log("Added Document: " + result.insertedId);
 }
 
-export { insertUser };
+// export { insertUser };
