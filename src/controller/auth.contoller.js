@@ -3,7 +3,7 @@
 const db = require("../models");
 
 const Login = db.login;
-const Register = db.register;
+const User = db.user;
 
 exports.signin = async (req, res) => {
     Login.findOne({
@@ -18,18 +18,17 @@ exports.signin = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-    const user = new Register({
+    const user = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
       });
     
-      user.save((err) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send({ message: err });
-          return;
-        }
+      user.save().then(() => {
         res.status(200).send({ message: 'User was registered successfully!' });
+      }).catch((err) => {
+        console.error(err);
+        res.status(500).send({ message: err });
+        return;
       });
 };

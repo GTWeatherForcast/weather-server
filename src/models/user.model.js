@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Register = mongoose.model(
-  'Register',
+const User = mongoose.model(
+  'User',
   new mongoose.Schema({
     username: String,
     email: String,
@@ -9,4 +9,4 @@ const Register = mongoose.model(
   }),
 );
 
-module.exports = Register;
+module.exports = User;
