@@ -2,9 +2,10 @@
 const express = require("express");
 const cors = require("cors");
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require("mongoose");
 const uri = "mongodb+srv://forecastweather:GTwebdev@cluster0.o2oa4an.mongodb.net/?retryWrites=true&w=majority";
 
-// Create a MongoClient
+/*Create a MongoClient
 const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
@@ -16,6 +17,21 @@ try {
 } catch(e) {
   console.error(e)
 }
+*/
+mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
+  console.log("Connected");
+}).catch((err) => {
+  console.error(err);
+});
+
+var Schema = mongoose.Schema;
+var loginSchema = new Schema({
+  username: String,
+  password: String
+});
+var login = mongoose.model('login', loginSchema)
+
+
 
 // create express app and configure it
 const app = express();
@@ -23,12 +39,28 @@ app.use(cors({origin: "*"}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+
+
 // simple route
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
+    res.send("hello")
     res.json({ message: "WeatherForecast server." });
+    console.log("works")
 });
 
-app.post("/api/v1/sign-in", (req, res) => {
+
+app.post('/sign-in', (req, res) => {
+  console.log("here")
+  login.findOne({username: req.body.username, password: req.body.password}, function(err, user)
+  {
+    if (err || !user) {
+      res.send("User not found")
+      console.log("Fail")
+    } else {
+      res.send("Logged in!")
+      console.log("works")
+    }
+  });
   console.log(req.body.message);
   res.json({ message: "works" });
 });
