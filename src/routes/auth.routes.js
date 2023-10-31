@@ -11,5 +11,7 @@ module.exports = function(app) {
 
     app.post("/api/v1/auth/sign-in", controller.signin);
 
+
+
     app.post("/api/v1/auth/sign-up", controller.signup);
 };
