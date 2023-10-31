@@ -3,15 +3,23 @@
 const db = require("../models");
 
 const Login = db.login;
+// const Login = db.login;
 const User = db.user;
 
 exports.signin = async (req, res) => {
-    Login.findOne({
+    User.findOne({
         username: req.body.username, 
-        password: req.body.password, 
-    }).then((user) => {
+    }, 'username password').then((user) => {
+        if (user == null) {
+          res.status(400).send({message: 'Error logging in'})
+        } else {
+          if (user.password !== req.body.password) {
+            res.status(400).send({message: 'Error logging in'})
+          } else {
+            res.status(200).send({message: 'Successfully logged in!'});
+          }
+        }
         // add stuff to check if correct user
-        res.status(200).send({message: 'Successfully logged in!'});
     }).catch((err) => {
         res.status(400).send({message: 'Errored!'});
     });
