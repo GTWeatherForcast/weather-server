@@ -4,7 +4,7 @@ const cors = require("cors");
 // const AuthController = require("./controller/auth");
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require("mongoose");
-const uri = "mongodb+srv://forecastweather:GTwebdev@cluster0.o2oa4an.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://forecastweather:GTwebdev@cluster0.o2oa4an.mongodb.net/weather?retryWrites=true&w=majority";
 
 mongoose.connect(uri, { useNewUrlParser: true }).then(() => {
   console.log("You successfully connected to MongoDB!");

@@ -7,6 +7,6 @@ const db = {};
 db.mongoose = mongoose;
 
 db.login = require('./login.model');
-db.register = require('./register.model');
+db.user = require('./user.model');
 
 module.exports = db;
