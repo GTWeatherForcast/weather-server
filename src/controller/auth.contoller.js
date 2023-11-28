@@ -2,8 +2,6 @@
 
 const db = require("../models");
 
-const Login = db.login;
-// const Login = db.login;
 const User = db.user;
 
 exports.signin = async (req, res) => {
